@@ -58,7 +58,8 @@ cur.execute("""CREATE TABLE IF NOT EXISTS bill_data_cust(
     
     name text,
     ammount text,
-    phone text
+    phone text,
+    date text    
      
     
     )""")
