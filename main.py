@@ -57,8 +57,8 @@ cur = conn.cursor()
 cur.execute("""CREATE TABLE IF NOT EXISTS bill_data_cust(
     
     name text,
-    ammount text,
     phone text,
+    ammount text,
     date text    
      
     
@@ -209,13 +209,13 @@ treev.column("4", width = 150, anchor ='c')
 # Assigning the heading names to the 
 # respective columns
 treev.heading("1", text ="Name")
-treev.heading("2", text ="DATE")
+treev.heading("2", text ="PH-NO")
 treev.heading("3", text ="AMMOUNT")
-treev.heading("4", text ="Email")
+treev.heading("4", text ="Date")
  
 # Inserting the items and their features to the 
 # columns built
-cur.execute("SELECT * FROM bill_data")
+cur.execute("SELECT * FROM bill_data_cust")
 
 data = cur.fetchall()
 
@@ -226,8 +226,8 @@ for single in data:
     four = single[3]
 
 
-#treev.insert("", 'end', text ="L1", 
-            # values = (one,two,three,four))
+    treev.insert("", 'end', text ="L1", 
+            values = (one,two,three,four))
 
 
 
