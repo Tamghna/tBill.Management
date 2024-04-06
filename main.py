@@ -17,7 +17,7 @@ if ft_val == "FIRST_OPEN":
     messagebox.showinfo("" , "WELCOME , LETS SETUP!")
     
     
-    com_name = askstring('////////////////////////////////////////// COMPANY NAME //////////////////////////////////////////', 'Enter Your Company name:')
+    com_name = askstring('////\\\\', 'Enter Your Company name:')
     os.chdir("settings")
     with open("com_name.set" , 'w')as f:
         f.write(com_name)
@@ -96,6 +96,8 @@ cur2.execute("""CREATE TABLE IF NOT EXISTS item(
 
 #MAIN root INSILIZATION:
 root = tk.Window()
+root.config(background="#b3c6ff")
+root.attributes('-fullscreen', True)
 root.title("VPYARR CLONE")
 root.geometry("1300x500")
 
@@ -129,6 +131,15 @@ tab2 = ttk.Frame(tabControl)
 tab3 = ttk.Frame(tabControl)
 tab4 = ttk.Frame(tabControl)
 tab5 = ttk.Frame(tabControl)
+
+
+
+
+
+
+
+
+
   
 tabControl.add(tab1, text ='Home') 
 tabControl.add(tab2, text ='Billing') 

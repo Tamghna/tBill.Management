@@ -13,11 +13,14 @@ from tkinter import ttk
 
 class bill_manager():
     def create_bill_window():
+        con1 = sqlite3.connect("items.db")
+        cur1 = con1.cursor()
 
 
         win1 = tk.Toplevel()
         win1.geometry("1300x800")
         win1.title("CREATE A NEW BILL _ WINDOW")
+        win1.config(background="#b3c6ff")
         
         
         heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19))
@@ -52,8 +55,37 @@ class bill_manager():
         
         itemquantity_entry_entry_win1 = tk.Entry(win1)
         itemquantity_entry_entry_win1.pack(anchor="n" , side="left" , pady=10)
+
+
+        #DROP DOWN
+
+
+        cur1.execute("SELECT * FROM item")
+
+        get_data_for_drop_down_menu = cur1.fetchall()
+
+        options = []
         
+        for sorted_get_data_drop in get_data_for_drop_down_menu:
+            options.append(sorted_get_data_drop[0])
+
+
+  
+# datatype of menu text 
+        clicked1 = tk.StringVar() 
         
+        # initial menu text 
+
+        
+        # Create Dropdown menu 
+        drop1_win1 = tk.OptionMenu( win1 , clicked1 , *options ) 
+
+        or_other_optin_label_win1 = tk.Label(win1 , text="OR select from list of added items:-")
+        or_other_optin_label_win1.place(x=1 , y=93)
+
+        drop1_win1.place(x=200 , y=93)
+                
+            
         
         
         
@@ -120,7 +152,7 @@ class bill_manager():
         
         
         
-        fill_this_details_text_win1 = tk.Label(win1 , text="Fill the Patient Data before adding items!:-" , font=("London-Tube" , 15))
+        fill_this_details_text_win1 = tk.Label(win1 , text="Fill the Patient Data before adding items!:-" , font=("London-Tube" , 15 ) , background="red")
         fill_this_details_text_win1.place(x=10 , y=450)
         
         cust_name_text_win1 = tk.Label(win1 , text="Patient Name:")
@@ -139,7 +171,27 @@ class bill_manager():
         cust_address_text_win1 = tk.Label(win1 , text="Patient Address:")
         cust_address_text_win1.place(x=10 , y=542)
         cust_address_entry_win1 = tk.Entry(win1)
-        cust_address_entry_win1.place(x=125  , y=542)
+        cust_address_entry_win1.place(x=120  , y=542)
+
+        
+        
+        
+
+
+        clicked2 = tk.StringVar()
+        options2=["----SELECT GENDER----" , "MALE" , "FEMALE"]
+        cust_gender_text_win1 = tk.Label(win1 , text="Patient Gender:")
+        cust_gender_text_win1.place(x=10 , y=574)
+        clicked2 = tk.StringVar() 
+        
+        # initial menu text 
+        clicked2.set( "----SELECT GENDER----" ) 
+        
+        # Create Dropdown menu 
+        drop2_win1 = tk.OptionMenu( win1 , clicked2 , *options2 ) 
+
+
+        drop2_win1.place(x=137 , y=574)
         
         
         
@@ -239,17 +291,7 @@ class item_manager():
         win2_item_gst_entry = tk.Entry(win2)
         win2_item_gst_entry.pack(padx=5)
         
-        
-        Checkbutton1 = tk.IntVar()   
 
-  
-        Button1 = tk.Checkbutton(win2, text = "Preset Price?",  
-                            variable = Checkbutton1, 
-                            onvalue = 1, 
-                            offvalue = 0, )
-        
-        Button1.pack()
-                
         
         
         win2_save_button = tk.Button(win2 , text="SAVE" , command=add_exe)
