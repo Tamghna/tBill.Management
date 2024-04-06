@@ -234,8 +234,13 @@ for single in data:
 
 
 
-create_bill_launcher_button = tk.Button(tab2, text="Create Bill" , command=this_app_pkg.bill_manager.create_bill_window)
+create_bill_launcher_button = tk.Button(tab2, text="Create Bill" ,bootstyle="outlined",command=this_app_pkg.bill_manager.create_bill_window)
 create_bill_launcher_button.pack()
+
+
+edit_bill_launcher_button = tk.Button(tab2, text="Edit Selected Bill 🧑‍💻" ,bootstyle="outlined", command=this_app_pkg.bill_manager.create_bill_window)
+edit_bill_launcher_button.pack()
+
 
 
 

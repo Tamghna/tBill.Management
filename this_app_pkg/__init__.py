@@ -1,12 +1,150 @@
 import ttkbootstrap as tk
 import sqlite3
+import sqlite3
+import ttkbootstrap as tk 
+import tkinter as otk 
+import datetime
+import time
+import os
+import tsoft_basic_pkg
+import this_app_pkg
+from tkinter import ttk 
+
+
 class bill_manager():
     def create_bill_window():
-        print("EXECUTED")
+
 
         win1 = tk.Toplevel()
-        win1.geometry("1200x600")
+        win1.geometry("1300x800")
         win1.title("CREATE A NEW BILL _ WINDOW")
+        
+        
+        heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19))
+        heading_win1.pack(pady=10)
+        
+        
+        manual_itemname_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM NAME MANUALLY:-")
+        manual_itemname_entry_text_win1.pack(anchor="n" , side="left" , padx=2 , pady=10)
+        
+        manual_itemname_entry_entry_win1 = tk.Entry(win1)
+        manual_itemname_entry_entry_win1.pack(anchor="n" , side="left" , pady=10)
+        
+        
+        
+        
+        
+        
+        
+        
+        manual_itemprice_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM PRICE MANUALLY:-")
+        manual_itemprice_entry_text_win1.pack(anchor="n" , side="left" , padx=10 , pady=10)
+        
+        manual_itemprice_entry_entry_win1 = tk.Entry(win1)
+        manual_itemprice_entry_entry_win1.pack(anchor="n" , side="left" , pady=10)
+        
+        
+        
+        
+        
+        itemquantity_entry_text_win1 = tk.Label(win1 , text="ENTER Quantity:-")
+        itemquantity_entry_text_win1.pack(anchor="n" , side="left" , padx=10 , pady=10)
+        
+        itemquantity_entry_entry_win1 = tk.Entry(win1)
+        itemquantity_entry_entry_win1.pack(anchor="n" , side="left" , pady=10)
+        
+        
+        
+        
+        
+        treev_win1 = ttk.Treeview(win1, selectmode ='browse')
+ 
+        # Calling pack method w.r.to treeview
+        treev_win1.place(x=20 , y=150)
+        
+        # Constructing vertical scrollbar
+        # with treeview
+        verscrlbar = ttk.Scrollbar(win1, 
+                                orient ="vertical", 
+                                command = treev_win1.yview)
+        
+        # Calling pack method w.r.to vertical 
+        # scrollbar
+        verscrlbar.pack()
+        
+        # Configuring treeview
+        treev_win1.configure(xscrollcommand = verscrlbar.set)
+        
+        # Defining number of columns
+        treev_win1["columns"] = ("1", "2", "3" , "4")
+        
+        # Defining heading
+        treev_win1['show'] = 'headings'
+        
+        # Assigning the width and anchor to  the
+        # respective columns
+        treev_win1.column("1", width = 270, anchor ='c')
+        treev_win1.column("2", width = 150, anchor ='c')
+        treev_win1.column("3", width = 150, anchor ='c')
+        treev_win1.column("4", width = 150, anchor ='c')
+        
+        # Assigning the heading names to the 
+        # respective columns
+        treev_win1.heading("1", text ="ITEM NAME")
+        treev_win1.heading("2", text ="PRICE")
+        treev_win1.heading("3", text ="GST")
+        treev_win1.heading("4", text ="QUANTITY")
+        
+        # Inserting the items and their features to the 
+        # columns built
+
+
+        #treev.insert("", 'end', text ="L1", 
+                    #values = (one,two,three,four))
+
+        
+        
+        
+        
+        add_item_button_win1 = tk.Button(win1 , text="ADD ITEM ✅" , bootstyle="outlined")
+        add_item_button_win1.place(x=20 , y=390)
+        
+        remove_selected_item_button_win1 = tk.Button(win1 , text="REMOVE AN SELECTED ITEM ❌" , bootstyle="outlined")
+        remove_selected_item_button_win1.place(x=170 , y=390)
+
+        save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined")
+        save_bill_win1.place(x=970 , y=390)
+        
+        save_bill_and_print_win1 = tk.Button(win1 , text="SAVE BILL AND PRINT 💾🖨️" , bootstyle="outlined")
+        save_bill_and_print_win1.place(x=970 , y=420)
+        
+        
+        
+        fill_this_details_text_win1 = tk.Label(win1 , text="Fill the Patient Data before adding items!:-" , font=("London-Tube" , 15))
+        fill_this_details_text_win1.place(x=10 , y=450)
+        
+        cust_name_text_win1 = tk.Label(win1 , text="Patient Name:")
+        cust_name_text_win1.place(x=10 , y=490)
+        cust_name_entry_win1 = tk.Entry(win1)
+        cust_name_entry_win1.place(x=119 , y=490)
+        
+        
+        cust_age_text_win1 = tk.Label(win1 , text="Patient Age:")
+        cust_age_text_win1.place(x=10 , y=515)
+        cust_age_entry_win1 = tk.Entry(win1)
+        cust_age_entry_win1.place(x=119 , y=515)
+        
+        
+        
+        cust_address_text_win1 = tk.Label(win1 , text="Patient Address:")
+        cust_address_text_win1.place(x=10 , y=542)
+        cust_address_entry_win1 = tk.Entry(win1)
+        cust_address_entry_win1.place(x=125  , y=542)
+        
+        
+        
+        
+        
         
         
         
@@ -14,6 +152,34 @@ class bill_manager():
         
         win1.mainloop()
         
+    
+    
+    
+    
+    
+    def edit_bill_window():
+        win4 = tk.Toplevel()
+        win4.geometry("1300x800")
+        win4.title("EDIT BILL   |   tBillManager")
+        
+        
+        
+        
+        
+        
+        
+        win4.geometry()
+
+
+
+
+
+
+
+
+
+
+
 
 class item_manager():
     def add_an_item_to_database_window():

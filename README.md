@@ -1,7 +1,10 @@
 # tBill.Management
 
+### THIS APP IS DESIGNED FOR MANAGING AND CREATING BILLS/INVOICES
 
-## Hello this is the app created by TSOFT
+
+* Open-Source *
+
  
 
  
