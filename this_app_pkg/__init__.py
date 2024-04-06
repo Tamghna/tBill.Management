@@ -13,6 +13,86 @@ from tkinter import ttk
 
 class bill_manager():
     def create_bill_window():
+
+        cached_list_items_win1 = []
+
+
+
+        def addItem():
+            global treev_win1
+            #getting
+            item_name = manual_itemname_entry_entry_win1.get()
+
+            if item_name == "":
+                item_name = clicked1.get()
+
+            item_price = manual_itemprice_entry_entry_win1.get()
+
+            item_quantity = itemquantity_entry_entry_win1.get()
+
+            item_gst = "12%"
+            
+
+            cached_list_items_win1.append([item_name , item_price , item_quantity , item_gst])
+            
+            
+            treev_win1.insert("", 'end', text ="L1", 
+                    values = (item_name , item_price , item_gst , item_quantity))
+            
+            print(cached_list_items_win1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        def remove_from_item_list_view_win1():
+            global treev_win1
+
+            slecteditem_win1_item_list_view = treev_win1.selection()[0]
+            treev_win1.delete(slecteditem_win1_item_list_view)
+
+
+            #getting
+            item_name = manual_itemname_entry_entry_win1.get()
+
+            if item_name == "":
+                item_name = clicked1.get()
+
+            item_price = manual_itemprice_entry_entry_win1.get()
+
+            item_quantity = itemquantity_entry_entry_win1.get()
+
+            item_gst = "12%"
+            
+
+            cached_list_items_win1.remove([item_name , item_price , item_quantity , item_gst])
+
+            print(cached_list_items_win1)
+
+
+
+
         con1 = sqlite3.connect("items.db")
         cur1 = con1.cursor()
 
@@ -87,9 +167,11 @@ class bill_manager():
                 
             
         
-        
+        global treev_win1
         
         treev_win1 = ttk.Treeview(win1, selectmode ='browse')
+
+        
  
         # Calling pack method w.r.to treeview
         treev_win1.place(x=20 , y=150)
@@ -131,17 +213,16 @@ class bill_manager():
         # columns built
 
 
-        #treev.insert("", 'end', text ="L1", 
-                    #values = (one,two,three,four))
+
 
         
         
         
         
-        add_item_button_win1 = tk.Button(win1 , text="ADD ITEM ✅" , bootstyle="outlined")
+        add_item_button_win1 = tk.Button(win1 , text="ADD ITEM ✅" , bootstyle="outlined" , command=addItem)
         add_item_button_win1.place(x=20 , y=390)
         
-        remove_selected_item_button_win1 = tk.Button(win1 , text="REMOVE AN SELECTED ITEM ❌" , bootstyle="outlined")
+        remove_selected_item_button_win1 = tk.Button(win1 , text="REMOVE AN SELECTED ITEM ❌" , bootstyle="outlined" , command=remove_from_item_list_view_win1)
         remove_selected_item_button_win1.place(x=170 , y=390)
 
         save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined")

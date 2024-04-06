@@ -98,7 +98,7 @@ cur2.execute("""CREATE TABLE IF NOT EXISTS item(
 root = tk.Window()
 root.config(background="#b3c6ff")
 root.attributes('-fullscreen', True)
-root.title("VPYARR CLONE")
+root.title("tBillMangagement")
 root.geometry("1300x500")
 
 def get_time():
@@ -220,7 +220,7 @@ treev.column("4", width = 150, anchor ='c')
 # Assigning the heading names to the 
 # respective columns
 treev.heading("1", text ="Name")
-treev.heading("2", text ="PH-NO")
+treev.heading("2", text ="Address")
 treev.heading("3", text ="AMMOUNT")
 treev.heading("4", text ="Date")
  

@@ -1,0 +1,4 @@
+            p_name = cust_name_entry_win1.get()
+            p_age = cust_age_entry_win1.get()
+            p_address = cust_address_entry_win1.get()
+            p_gender = clicked2.get()
