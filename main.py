@@ -69,7 +69,7 @@ cur.execute("""CREATE TABLE IF NOT EXISTS bill_data(
     
     name text,
     items text,
-    ammount
+    ammount text
      
     
     )""")
