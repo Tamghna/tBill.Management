@@ -8,6 +8,8 @@ import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
 
+
+
 ft_val = open("ft_value.val" , 'r').read()
 
 if ft_val == "FIRST_OPEN":
