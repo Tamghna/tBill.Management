@@ -9,16 +9,195 @@ import os
 import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
-from tkcalendar import *
+
+
+
+
+
+
+
 
 try:
 
     class bill_manager():
         def create_bill_window():
 
+
+
+            def save_bill_win1_function():
+
+                #getting
+
+                import time
+                from time import strftime
+
+                formatted_date = strftime("%d-%m-%Y %H:%M:%S")
+        
+
+                patient_name = cust_name_entry_win1.get()
+                patient_age = cust_age_entry_win1.get()
+                patient_address = cust_address_entry_win1.get()
+                patient_gender = clicked2.get()
+                add_date = cal_addmission.entry.get()
+                dis_date = cal_dis.entry.get()
+
+
+  
+                from docx import Document
+
+
+                    # Create an instance of a word document
+                doc = Document()
+
+
+
+                    
+                from docx.shared import Inches, Cm
+
+                section = doc.sections[0]
+                section.left_margin = Cm(1.0)
+                section.right_margin = Cm(1.0)
+                section.top_margin = Cm(1.0)
+                
+                os.chdir("settings")
+                logo_path = open("logo_path.set" , 'r').read()
+                doc.add_picture(str(logo_path), width=Inches(2), height=Inches(2))
+                os.chdir("..")
+
+
+
+
+                os.chdir("settings")
+                hipdm_val = open("hospital_ipd_mode.set" , 'r').read()
+                os.chdir("..")
+
+
+                if hipdm_val == "1":
+                     
+                    top = [
+                            ["Date&Time: " + formatted_date , "" ,""],
+                            ["Name:" + patient_name , "Age:" + patient_age , "Gender:" + patient_gender],
+                            ["Address:" + patient_address , "" , ""],
+                            ["Date Of Admission:"+ add_date  , "Date of Discharge:" + dis_date , ""]
+
+
+                        ]
+                
+
+                else:
+                    top = [
+                            ["Date&Time: " + formatted_date , "" ,""],
+                            ["Name:" + patient_name , "Age:" + patient_age , "Gender:" + patient_gender],
+                            ["Address:" + patient_address , "" , ""],
+                           # ["Date Of Admission:"+ add_date +  "Date of Discharge:" + dis_date , ""]
+
+
+                        ]
+                
+
+
+
+
+
+
+
+                    
+
+                table1 = doc.add_table(rows=1 , cols=3)
+
+
+                    
+                for one , two , three in top:
+                        cells1 = table1.add_row().cells
+                        cells1[0].text = one
+                        cells1[1].text = two
+                        cells1[2].text = three
+
+                table1.style = 'Light List'
+
+
+
+
+
+
+                os.chdir("settings")
+                inv_title = open("invoice_title.set" , 'r').read()
+                os.chdir("..")
+                doc.add_heading(str(inv_title), 2)
+
+
+
+
+                table_header = ["SL.NO" , "Item" , "Quantity" , "Price"]
+
+                table = doc.add_table(rows=2 , cols=4)
+
+                for i in range(3):
+                        table.rows[0].cells[i].text = table_header[i]
+
+
+                for service , quantiry ,pri , gst in cached_list_items_win1:
+                        cells = table.add_row().cells
+                        cells[0].text = "n/a"
+                        cells[1].text = service
+                        cells[2].text = pri
+                        cells[3].text=  str(  "Rs." +   quantiry)
+
+
+                table.style = 'Colorful List'
+
+
+                doc.add_heading("Grand Total:Rs." + str(total_price_count) , 4)
+                #doc.add_heading("Amount in Words: " + number_to_word(total) + " Only." , 4)
+
+                doc.add_paragraph("")
+                from docx.enum.text import WD_ALIGN_PARAGRAPH
+                para = doc.add_paragraph('Authorized Signatory:_______________________')
+                para.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+
+                os.chdir("bills_created")
+                
+                # Now save the document to a location
+                doc.save(patient_name + "_bill.docx")
+
+                from tkinter import messagebox
+                messagebox.showinfo("" , 'SUCESSFULLY SAVED BILL/INVOICE')
+                import webbrowser
+                webbrowser.open(patient_name +"_bill.docx" )
+
+                os.chdir("..")
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             cached_list_items_win1 = []
             global total_price_count
             total_price_count = 0
+
+            
 
 
 
@@ -32,6 +211,7 @@ try:
                     item_name = clicked1.get()
 
                 item_price = manual_itemprice_entry_entry_win1.get()
+
 
                 item_quantity = itemquantity_entry_entry_win1.get()
 
@@ -239,7 +419,7 @@ try:
             remove_selected_item_button_win1 = tk.Button(win1 , text="REMOVE AN SELECTED ITEM ❌" , bootstyle="outlined" , command=remove_from_item_list_view_win1)
             remove_selected_item_button_win1.place(x=170 , y=390)
 
-            save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined")
+            save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined" , command=save_bill_win1_function)
             save_bill_win1.place(x=970 , y=390)
             
             save_bill_and_print_win1 = tk.Button(win1 , text="SAVE BILL AND PRINT 💾🖨️" , bootstyle="outlined")
@@ -287,6 +467,19 @@ try:
 
 
             drop2_win1.place(x=137 , y=574)
+
+
+            cal_addmission_text = tk.Label(win1 , text="Date Of Addmission" )
+            cal_addmission_text.place(x=10 , y=650)
+            cal_addmission = tk.DateEntry(win1 , bootstyle="danger")
+            cal_addmission.place(x=250 , y=650)
+
+
+
+            cal_dis_text = tk.Label(win1 , text="Date Of Discharge" )
+            cal_dis_text.place(x=470 , y=650)
+            cal_dis = tk.DateEntry(win1 , bootstyle="danger")
+            cal_dis.place(x=675 , y=650)
 
 
 

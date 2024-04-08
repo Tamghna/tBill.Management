@@ -7,6 +7,8 @@ import os
 import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
+from tkinter import messagebox
+
 
 
 
@@ -93,7 +95,7 @@ cur2.execute("""CREATE TABLE IF NOT EXISTS item(
     )""")
 
 
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 #MAIN root INSILIZATION:
@@ -134,14 +136,6 @@ tab3 = ttk.Frame(tabControl)
 tab4 = ttk.Frame(tabControl)
 tab5 = ttk.Frame(tabControl)
 
-
-
-
-
-
-
-
-
   
 tabControl.add(tab1, text ='Home') 
 tabControl.add(tab2, text ='Billing') 
@@ -152,7 +146,7 @@ tabControl.add(tab5, text ='Settings')
 tabControl.pack(expand = 1, fill ="both" , padx=10 , pady= 10) 
 
 
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 
@@ -167,19 +161,6 @@ tabControl.pack(expand = 1, fill ="both" , padx=10 , pady= 10)
 #home:
 todays_sale_label = tk.Label(tab1 , text="Todays Sales:" , font=("Impact" , 15))
 todays_sale_label.pack()
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -254,7 +235,7 @@ create_bill_launcher_button.pack()
 edit_bill_launcher_button = tk.Button(tab2, text="Edit Selected Bill 🧑‍💻" ,bootstyle="outlined", command=this_app_pkg.bill_manager.create_bill_window)
 edit_bill_launcher_button.pack()
 
-
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 
 
@@ -273,6 +254,130 @@ add_an_item_to_database_button.pack(pady=10)
 
 view_all_item_from_data_base_button = tk.Button(tab3 , text="View all items in database" , command=this_app_pkg.item_manager.view_item_window)
 view_all_item_from_data_base_button.pack(pady=10)
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+
+
+
+#SETTINGS:
+
+
+from tkinter import Tk     # from tkinter import Tk for Python 3.x
+from tkinter.filedialog import askopenfilename
+def change_logo_settings():
+
+    filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+    os.chdir("settings")
+
+    with open("logo_path.set" , 'w')as f:
+        f.write(str(filename))
+        f.close()
+
+
+
+    os.chdir("..")
+
+    from tkinter import messagebox
+    messagebox.showinfo("LOGO SAVED")
+
+
+def change_invoice_title():
+    from tkinter import messagebox
+    from tkinter.simpledialog import askstring
+    
+
+    
+    
+    title_name_cache = askstring('////\\\\', 'Enter Invoice TITLE:-')
+
+    os.chdir("settings")
+
+    with open("invoice_title.set" , 'w')as f:
+        f.write(str(title_name_cache))
+        f.close()
+
+    os.chdir("..")
+
+
+
+def set_hospital_ipd_mode():
+    print("RAN")
+
+    if messagebox.askyesnocancel("" , "Do you want to HOSPITAL IPD MODE to BE ON?           CLICK [YES] to turn {ON} and CLICK [NO] to turn {OFF}") == True:
+
+        
+        os.chdir("settings")
+        with open("hospital_ipd_mode.set" , 'w')as f:
+            f.write("1")
+            f.close()
+
+        os.chdir("..")
+        messagebox.showinfo("" , "SET SUCESSFULLY")
+
+    else:
+        os.chdir("settings")
+        with open("hospital_ipd_mode.set" , 'w')as f:
+            f.write("0")
+            f.close()
+
+        os.chdir("..")
+        messagebox.showinfo("" , "SET SUCESSFULLY")
+
+
+
+
+
+
+change_company_name_button_tab5 = tk.Button(tab5 , text="CHANGE COMPANY NAME" , bootstyle="outlined")
+change_company_name_button_tab5.place(x=10 , y=20)
+
+
+change_invoice_title_button_tab5 = tk.Button(tab5 , text="CHANGE INVOICE TITLE" , bootstyle="outlined" , command=change_invoice_title)
+change_invoice_title_button_tab5.place(x=10 , y=50)
+
+
+
+change_invoice_logo_button_tab5 = tk.Button(tab5 , text="CHANGE INVOICE LOGO" , bootstyle="outlined" , command=change_logo_settings)
+change_invoice_logo_button_tab5.place(x=10 , y=80)
+
+
+change_hospital_ipd_mode_button_tab5 = tk.Button(tab5 , text="SET HOSPITAL IPD MODE ON OR OFF" , bootstyle="outlined" , command=set_hospital_ipd_mode)
+change_hospital_ipd_mode_button_tab5.place(x=10 , y=110)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -294,3 +399,9 @@ view_all_item_from_data_base_button.pack(pady=10)
 #LOOP rootS:
 get_time()
 root.mainloop()
+
+
+
+
+
+
