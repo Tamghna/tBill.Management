@@ -2,3 +2,17 @@
             p_age = cust_age_entry_win1.get()
             p_address = cust_address_entry_win1.get()
             p_gender = clicked2.get()
+
+
+
+
+
+
+
+
+                name text,
+    items text,
+    ammount text,
+    gender text,
+    address text,
+    age text

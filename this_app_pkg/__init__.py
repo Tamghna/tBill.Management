@@ -26,6 +26,9 @@ try:
 
             def save_bill_win1_function():
 
+                con2 = sqlite3.connect("bill_data.db")
+                cur2 = con2.cursor()
+
                 #getting
 
                 import time
@@ -38,8 +41,18 @@ try:
                 patient_age = cust_age_entry_win1.get()
                 patient_address = cust_address_entry_win1.get()
                 patient_gender = clicked2.get()
-                add_date = cal_addmission.entry.get()
-                dis_date = cal_dis.entry.get()
+
+
+
+
+                os.chdir("settings")
+                hpval = open("hospital_ipd_mode.set" , 'r').read()
+                os.chdir("..")
+
+
+                if hpval == "1":
+                    add_date = cal_addmission.entry.get()
+                    dis_date = cal_dis.entry.get()
 
 
   
@@ -59,10 +72,19 @@ try:
                 section.right_margin = Cm(1.0)
                 section.top_margin = Cm(1.0)
                 
-                os.chdir("settings")
-                logo_path = open("logo_path.set" , 'r').read()
-                doc.add_picture(str(logo_path), width=Inches(2), height=Inches(2))
-                os.chdir("..")
+
+                try:
+                     
+                    os.chdir("settings")
+                    logo_path = open("logo_path.set" , 'r').read()
+                    doc.add_picture(str(logo_path), width=Inches(2), height=Inches(2))
+                    os.chdir("..")
+                except Exception:
+                     from tkinter import messagebox
+                     os.chdir("..")
+                     messagebox.showerror("ERROR:00x120" , "AN ERROR OCCOURED.  ERROR:THE LOGO FILE IS NOT FOUND , IT MIGHT BE DELETED OR MOVED . PLEASE ASSIGN A NEW IMAGE FILE FROM THIS APPS' Settings TAB")
+                     win1.destroy()
+                     exit()
 
 
 
@@ -130,15 +152,18 @@ try:
 
                 table_header = ["SL.NO" , "Item" , "Quantity" , "Price"]
 
-                table = doc.add_table(rows=2 , cols=4)
+                table = doc.add_table(rows=3 , cols=4)
 
                 for i in range(3):
                         table.rows[0].cells[i].text = table_header[i]
 
+                sl_count = 0
 
                 for service , quantiry ,pri , gst in cached_list_items_win1:
+                        int(sl_count)
+                        sl_count +=1
                         cells = table.add_row().cells
-                        cells[0].text = "n/a"
+                        cells[0].text = str(sl_count)
                         cells[1].text = service
                         cells[2].text = pri
                         cells[3].text=  str(  "Rs." +   quantiry)
@@ -162,11 +187,26 @@ try:
                 doc.save(patient_name + "_bill.docx")
 
                 from tkinter import messagebox
-                messagebox.showinfo("" , 'SUCESSFULLY SAVED BILL/INVOICE')
+
+
+                cur2.execute("INSERT INTO bill_data VALUES (? , ? , ? , ? , ? , ? )",(patient_name, str(cached_list_items_win1),total_price_count , patient_gender , patient_address , patient_age))
+                
+                print(formatted_date)
+
+                cur2.execute("INSERT INTO bill_data_cust VALUES (? , ? , ? , ?)",(patient_name,patient_address,total_price_count,formatted_date))
+
+                con2.commit()
+                con2.close()
+                messagebox.showinfo("" , 'SUCESSFULLY SAVED BILL/INVOICE' , parent=win1)
                 import webbrowser
                 webbrowser.open(patient_name +"_bill.docx" )
-
+                
                 os.chdir("..")
+                
+                win1.destroy()
+                import main
+                main.refresh()
+                
 
     
 
@@ -293,10 +333,18 @@ try:
 
 
             win1 = tk.Toplevel()
+            win1.attributes('-fullscreen', True)
             win1.geometry("1300x800")
             win1.title("CREATE A NEW BILL _ WINDOW")
             win1.config(background="#b3c6ff")
-            
+            from tkinter import messagebox
+
+            def exit_command():
+                 if messagebox.askyesnocancel("" , "WARNING :THIS ACTION WILL EXIT THIS WINDOW AND GO BACK TO THE HOME SCREEN .. ANY UNSAVED WORK WILL BE LOST!  .. DO YOU WANT TO EXIT?" , parent=win1):
+                      win1.destroy()
+
+            exit_button = tk.Button(win1 , text="EXIT❌" , command=exit_command)
+            exit_button.place(x=1200 , y=10)            
             
             heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19))
             heading_win1.pack(pady=10)
@@ -469,18 +517,27 @@ try:
             drop2_win1.place(x=137 , y=574)
 
 
-            cal_addmission_text = tk.Label(win1 , text="Date Of Addmission" )
-            cal_addmission_text.place(x=10 , y=650)
-            cal_addmission = tk.DateEntry(win1 , bootstyle="danger")
-            cal_addmission.place(x=250 , y=650)
+
+            os.chdir("settings")
+            hpval = open("hospital_ipd_mode.set" , 'r').read()
+            os.chdir("..")
+
+
+            if hpval == "1":
+                 
+                cal_addmission_text = tk.Label(win1 , text="Date Of Addmission:-" )
+                cal_addmission_text.place(x=10 , y=650)
+                cal_addmission = tk.DateEntry(win1 , bootstyle="danger")
+                cal_addmission.place(x=100 , y=650)
 
 
 
-            cal_dis_text = tk.Label(win1 , text="Date Of Discharge" )
-            cal_dis_text.place(x=470 , y=650)
-            cal_dis = tk.DateEntry(win1 , bootstyle="danger")
-            cal_dis.place(x=675 , y=650)
+                cal_dis_text = tk.Label(win1 , text="Date Of Discharge:-" )
+                cal_dis_text.place(x=470 , y=650)
+                cal_dis = tk.DateEntry(win1 , bootstyle="danger")
+                cal_dis.place(x=560 , y=650)
 
+            con1.close()
 
 
 
@@ -503,6 +560,8 @@ try:
             win4 = tk.Toplevel()
             win4.geometry("1300x800")
             win4.title("EDIT BILL   |   tBillManager")
+
+            
             
             
             
@@ -686,4 +745,4 @@ try:
 
 except Exception as e:
     from tkinter import messagebox
-    messagebox.showerror("" , "AN ERROR OCCOURED!       ERROR IS :- " + str(e))
+    messagebox.showerror("" , "AN ERROR OCCOURED!       ERROR IS :- " + str(e))()
