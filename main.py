@@ -101,7 +101,7 @@ cur2.execute("""CREATE TABLE IF NOT EXISTS item(
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-
+import sys
 
 #MAIN root INSILIZATION:
 root = tk.Window()
@@ -126,7 +126,7 @@ welcome_text.pack()
 date_time_label = tk.Label(root , text="DATA_NOT_FOUND" , font=("London-Tube" , 20))
 date_time_label.pack()
 
-exit_button = tk.Button(root , text="EXIT" , command=exit , bootstyle="success.Outline.TButton")
+exit_button = tk.Button(root , text="EXIT" , command=sys.exit , bootstyle="success.Outline.TButton")
 exit_button.pack(side="right" , padx=10)
 
 
@@ -461,7 +461,7 @@ def edit_bill():
 
                 table_header = ["SL.NO" , "Item" , "Quantity" , "Price"]
 
-                table = doc.add_table(rows=3 , cols=4)
+                table = doc.add_table(rows=4 , cols=4)
 
                 for i in range(3):
                         table.rows[0].cells[i].text = table_header[i]
