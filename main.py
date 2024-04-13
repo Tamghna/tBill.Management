@@ -8,7 +8,10 @@ import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
+from updator import updator
 
+updator.run()
+print(os.getcwd())
 
 
 
@@ -107,7 +110,8 @@ import sys
 root = tk.Window()
 root.config(background="#b3c6ff")
 root.attributes('-fullscreen', True)
-root.title("tBillMangagement")
+cur_ver = open("version.ver" , 'r').read()
+root.title("tBillMangagement    VER:" + cur_ver)
 root.geometry("1300x500")
 
 def get_time():
@@ -118,7 +122,7 @@ os.chdir("settings")
 com_name_get = open("com_name.set" , 'r').read()
 os.chdir("..")
 
-welcome_text = tk.Label(root  , text="WELCOME , " + com_name_get , font=("London-Tube" , 25))
+welcome_text = tk.Label(root  , text="WELCOME , " + com_name_get + "    SOFTWARE_VER:" + cur_ver  , font=("London-Tube" , 25))
 welcome_text.pack()
 
 
@@ -461,7 +465,7 @@ def edit_bill():
 
                 table_header = ["SL.NO" , "Item" , "Quantity" , "Price"]
 
-                table = doc.add_table(rows=4 , cols=4)
+                table = doc.add_table(rows=5 , cols=5)
 
                 for i in range(3):
                         table.rows[0].cells[i].text = table_header[i]
