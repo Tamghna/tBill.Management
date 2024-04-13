@@ -84,7 +84,6 @@ missing module named 'html5lib.constants' - imported by bs4.builder._html5lib (t
 missing module named html5lib - imported by bs4.builder._html5lib (top-level), lxml.html.html5parser (top-level)
 missing module named urlparse - imported by requests.compat (conditional), lxml.ElementInclude (optional), lxml.html (optional), lxml.html.html5parser (optional)
 missing module named urllib2 - imported by requests.compat (conditional), lxml.ElementInclude (optional), lxml.html.html5parser (optional)
-missing module named cssselect - imported by lxml.cssselect (optional)
 missing module named Cookie - imported by requests.compat (conditional)
 missing module named cookielib - imported by requests.compat (conditional)
 missing module named simplejson - imported by requests.compat (optional)

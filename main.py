@@ -8,11 +8,12 @@ import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
-from updator import updator
+
 from decimal import *
-if __name__ == "__main__":
-     
-    updator.run()
+from updator import updator1
+
+
+
 print(os.getcwd())
 
 
