@@ -12,10 +12,19 @@ def updates(progress_bar):
 
 
             
-
+            import os
                 
 
             os.mkdir("./temp_downloads")
+            import stat
+
+            os.chmod("./temp_downloads", stat.S_IWRITE)
+
+
+            for root, dirs, files in os.walk("./temp_downloads"):
+                for fname in files:
+                    full_path = os.path.join(root, fname)
+                    os.chmod(full_path ,stat.S_IWRITE)
             os.chdir("./temp_downloads")
 
 
