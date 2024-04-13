@@ -9,8 +9,10 @@ import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
 from updator import updator
-
-updator.run()
+from decimal import *
+if __name__ == "__main__":
+     
+    updator.run()
 print(os.getcwd())
 
 
@@ -223,11 +225,13 @@ def refresh():
     cur.execute("SELECT * FROM bill_data_cust")
 
     data = cur.fetchall()
-
+    
     for single in data:
         one = single[0]
         two = single[1]
+        global three
         three= single[2]
+
         four = single[3]
 
 
@@ -249,6 +253,48 @@ create_bill_launcher_button.pack()
 
 
 def edit_bill():
+            def number_to_word(number):
+                    def get_word(n):
+                        words={ 0:"", 1:"One", 2:"Two", 3:"Three", 4:"Four", 5:"Five", 6:"Six", 7:"Seven", 8:"Eight", 9:"Nine", 10:"Ten", 11:"Eleven", 12:"Twelve", 13:"Thirteen", 14:"Fourteen", 15:"Fifteen", 16:"Sixteen", 17:"Seventeen", 18:"Eighteen", 19:"Nineteen", 20:"Twenty", 30:"Thirty", 40:"Forty", 50:"Fifty", 60:"Sixty", 70:"Seventy", 80:"Eighty", 90:"Ninty" }
+                        if n<=20:
+                            return words[n]
+                        else:
+                            ones=n%10
+                            tens=n-ones
+                            return words[tens]+" "+words[ones]
+                            
+                    def get_all_word(n):
+                        d=[100,10,100,100]
+                        v=["","Hundred And","Thousand","lakh"]
+                        w=[]
+                        for i,x in zip(d,v):
+                            t=get_word(n%i)
+                            if t!="":
+                                t+=" "+x
+                            w.append(t.rstrip(" "))
+                            n=n//i
+                        w.reverse()
+                        w=' '.join(w).strip()
+                        if w.endswith("And"):
+                            w=w[:-3]
+                        return w
+
+                    arr=str(number).split(".")
+                    number=int(arr[0])
+                    crore=number//10000000
+                    number=number%10000000
+                    word=""
+                    if crore>0:
+                        word+=get_all_word(crore)
+                        word+=" crore "
+                    word+=get_all_word(number).strip()+" Rupees"
+                    if len(arr)>1:
+                        if len(arr[1])==1:
+                            arr[1]+="0"
+                        word+=" and "+get_all_word(int(arr[1]))+" paisa"
+                    return word
+
+
             win_edit = tk.Toplevel()
             win_edit.geometry("1400x850")
 
@@ -467,11 +513,11 @@ def edit_bill():
 
                 table = doc.add_table(rows=5 , cols=5)
 
-                for i in range(3):
+                for i in range(4):
                         table.rows[0].cells[i].text = table_header[i]
 
                 sl_count = 0
-
+                global tp
                 for service , quantiry ,pri , gst in res:
                         int(sl_count)
                         sl_count +=1
@@ -481,11 +527,35 @@ def edit_bill():
                         cells[2].text = pri
                         cells[3].text=  str(  "Rs." +   quantiry)
 
+                cells6 = table.add_row().cells
+                cells6[0].text='-'
+                cells6[1].text='-'
+                cells6[2].text='-'
+                cells6[3].text= "Total:- Rs." +str(tp)
+
+
+
+
 
                 table.style = 'Colorful List'
-                global tp
 
-                doc.add_heading("Grand Total:Rs." + str(tp) , 4)
+
+                doc.add_heading("Grand Total:- Rs." + str(tp) , 4)
+
+                doc.add_heading("Amount in Words: Rupees " + number_to_word(tp) + " Only." , 4)
+
+
+
+
+
+
+                
+
+
+                table.style = 'Colorful List'
+
+
+
                 #doc.add_heading("Amount in Words: " + number_to_word(total) + " Only." , 4)
 
                 doc.add_paragraph("")
@@ -601,6 +671,8 @@ def edit_bill():
 
                 itemquantity_entry_entry_win1.delete(0, tk.END)
 
+                show_total1.config(text="TOTAL=" + str(tp))
+
                 print(res)
 
 
@@ -649,6 +721,7 @@ def edit_bill():
 
 
                 treev2.delete(slecteditem_win1_item_list_view)
+                show_total1.config(text="TOTAL=" + str(tp))
 
 
 
@@ -745,6 +818,11 @@ def edit_bill():
             save_bill_win1 = tk.Button(win_edit , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined" , command=save_bill_win_edit_function)
             save_bill_win1.place(x=970 , y=390)
 
+            
+            global show_total1
+
+            show_total1 = tk.Label(win_edit , text="TOTAL="+str(total_price_count_win_edit) , font=("Ariel" , 16) , bootstyle = "danger")
+            show_total1.place(x=980 , y=300)
 
 
 

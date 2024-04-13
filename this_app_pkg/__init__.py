@@ -9,6 +9,7 @@ import os
 import tsoft_basic_pkg
 import this_app_pkg
 from tkinter import ttk 
+from decimal import *
 
 
 
@@ -197,7 +198,7 @@ try:
 
                 table = doc.add_table(rows=4 , cols=4)
 
-                for i in range(3):
+                for i in range(4):
                         table.rows[0].cells[i].text = table_header[i]
 
                 sl_count = 0
@@ -210,13 +211,23 @@ try:
                         cells[1].text = service
                         cells[2].text = pri
                         cells[3].text=  str(  "Rs." +   quantiry)
+                
+                cells5 = table.add_row().cells
+                cells5[0].text=''
+                cells5[1].text=''
+                cells5[2].text=''
+                cells5[3].text= "Total:- Rs." +str(total_price_count)
+
+
+
 
 
                 table.style = 'Colorful List'
 
 
-                doc.add_heading("Grand Total:Rs." + str(total_price_count) , 4)
-                doc.add_heading("Amount in Words: " + number_to_word(total_price_count) + " Only." , 4)
+                doc.add_heading("Grand Total:- Rs." + str(total_price_count) , 4)
+
+                doc.add_heading("Amount in Words: Rupees " + number_to_word(total_price_count) + " Only." , 4)
 
 
 
@@ -252,6 +263,8 @@ try:
                 win1.destroy()
                 import main
                 main.refresh()
+
+                
                 
 
     
@@ -289,6 +302,7 @@ try:
 
 
             def addItem():
+
                 global treev_win1
                 #getting
                 item_name = manual_itemname_entry_entry_win1.get()
@@ -302,7 +316,10 @@ try:
                 item_quantity = itemquantity_entry_entry_win1.get()
 
                 item_gst = "12%"
+
                 global total_price_count
+
+
                 total_price_count += int(item_price)
 
 
@@ -327,6 +344,8 @@ try:
 
                 itemquantity_entry_entry_win1.delete(0, tk.END)
 
+                show_total.config(text="TOTAL=" + str(total_price_count))
+
 
 
 
@@ -344,7 +363,13 @@ try:
 
                 global total_price_count
 
-                total_price_count -= int(details.get("values")[1])
+
+
+                r_itm = details.get("values")[1]
+
+
+
+                total_price_count -= int(r_itm)
 
 
                 cached_list_items_win1.remove([str(details.get("values")[0])   , str(details.get("values")[1]) , str( details.get("values")[3])    ,   str(details.get("values")[2] ) ])
@@ -356,7 +381,8 @@ try:
                 
 
 
-
+                
+                show_total.config(text="TOTAL=" + str(total_price_count))
                 print(cached_list_items_win1)
                 print(total_price_count)
 
@@ -542,6 +568,11 @@ try:
             cust_address_entry_win1 = tk.Entry(win1)
             cust_address_entry_win1.place(x=120  , y=542)
 
+
+            global show_total
+
+            show_total = tk.Label(win1 , text="Total=0" , font=("Ariel" , 16) , bootstyle = "danger")
+            show_total.place(x=980 , y=300)
             
             
             
