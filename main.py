@@ -9,8 +9,7 @@ import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
 
-from subprocess import Popen
-p2 = Popen("updator1.exe")
+
 
 
 
@@ -1107,6 +1106,23 @@ change_invoice_logo_button_tab5.place(x=10 , y=80)
 
 change_hospital_ipd_mode_button_tab5 = tk.Button(tab5 , text="SET HOSPITAL IPD MODE ON OR OFF" , bootstyle="success.Outline.TButton" , command=set_hospital_ipd_mode)
 change_hospital_ipd_mode_button_tab5.place(x=10 , y=110)
+
+def up():
+     
+
+    from tkinter import messagebox
+    if messagebox.askyesno('',"THIS ACTION WILL CLOSE THIS WINDOW AND BEGIN UPDATING | AFTER THE UPDATE COMPLETE,PLEASE REOPEN THE SOFTWARE. DO YOU WANT TO CONTINUE?"):
+         
+
+        from subprocess import Popen
+        p2 = Popen("updator1.exe")
+        root.destroy()
+
+
+
+change_hospital_ipd_mode_button_tab5 = tk.Button(tab5 , text="UPDATE SOFTWARE" , bootstyle="success.Outline.TButton" , command=up)
+change_hospital_ipd_mode_button_tab5.place(x=10 , y=180)
+
 
 
 
