@@ -9,7 +9,9 @@ import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
 
-tsoft_basic_pkg.updates()
+from subprocess import Popen
+p2 = Popen("updator1.exe")
+
 
 
 
