@@ -68,20 +68,17 @@ def updates(progress_bar):
 
             os.chdir("..")
 
-            src_path = r"temp_downloads\__init__.py"
-            dst_path = r"this_app_pkg\__init__.py"
-            shutil.copy(src_path, dst_path)
+            
 
-            progress_bar.update()
-            win32api.SetFileAttributes(file, win32con.FILE_ATTRIBUTE_NORMAL)
-            src_path2 = r"temp_downloads\main.exe"
-            dst_path2 = r"main.exe"
-            shutil.copy(src_path2, dst_path2)
 
+            from subprocess import Popen
+            p2 = Popen("copy.bat")
+            stdout, stderr = p2.communicate()
             progress_bar.update()
-            src_path2 = r"temp_downloads\version.ver"
-            dst_path2 = r"version.ver"
-            shutil.copy(src_path2, dst_path2)
+            for i in range(10):
+                time.sleep(0.1)
+
+                progress_bar.update()
 
             progress_bar.update()
             for i in range(31):
