@@ -16,15 +16,14 @@ def updates(progress_bar):
                 
 
             os.mkdir("./temp_downloads")
-            import stat
+            import win32con, win32api,os
 
-            os.chmod("./temp_downloads", stat.S_IWRITE)
+            file='main.exe'
 
 
-            for root, dirs, files in os.walk("./temp_downloads"):
-                for fname in files:
-                    full_path = os.path.join(root, fname)
-                    os.chmod(full_path ,stat.S_IWRITE)
+            #to force deletion of a file set it to normal
+
+
             os.chdir("./temp_downloads")
 
 
@@ -74,6 +73,7 @@ def updates(progress_bar):
             shutil.copy(src_path, dst_path)
 
             progress_bar.update()
+            win32api.SetFileAttributes(file, win32con.FILE_ATTRIBUTE_NORMAL)
             src_path2 = r"temp_downloads\main.exe"
             dst_path2 = r"main.exe"
             shutil.copy(src_path2, dst_path2)
