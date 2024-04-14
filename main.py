@@ -9,8 +9,7 @@ import this_app_pkg
 from tkinter import ttk 
 from tkinter import messagebox
 
-from decimal import *
-from updator import updator1
+tsoft_basic_pkg.updates()
 
 
 
