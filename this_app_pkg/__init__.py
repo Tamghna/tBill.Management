@@ -227,7 +227,7 @@ try:
 
                 doc.add_heading("Grand Total:- Rs." + str(total_price_count) , 4)
 
-                doc.add_heading("Amount in Words: Rupees " + number_to_word(total_price_count) + " Only." , 4)
+                doc.add_heading("Amount in Words: " + number_to_word(total_price_count) + " Only." , 4)
 
 
 
