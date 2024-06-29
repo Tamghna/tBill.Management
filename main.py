@@ -951,6 +951,7 @@ def open_bill():
              os.chdir("bills_created")
 
              webbrowser.open(str(details.get("values")[0] + "_bill.docx"))
+             os.chdir("..")
      
      
 

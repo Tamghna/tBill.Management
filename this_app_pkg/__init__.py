@@ -415,7 +415,7 @@ try:
                  if messagebox.askyesnocancel("" , "WARNING :THIS ACTION WILL EXIT THIS WINDOW AND GO BACK TO THE HOME SCREEN .. ANY UNSAVED WORK WILL BE LOST!  .. DO YOU WANT TO EXIT?" , parent=win1):
                       win1.destroy()
 
-            exit_button = tk.Button(win1 , text="EXIT❌" , command=exit_command)
+            exit_button = tk.Button(win1 , text="Back❌" , command=exit_command)
             exit_button.place(x=1200 , y=10)            
             
             heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19))
@@ -541,29 +541,27 @@ try:
 
             save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined" , command=save_bill_win1_function)
             save_bill_win1.place(x=970 , y=390)
-            
-            save_bill_and_print_win1 = tk.Button(win1 , text="SAVE BILL AND PRINT 💾🖨️" , bootstyle="outlined")
-            save_bill_and_print_win1.place(x=970 , y=420)
+
             
             
             
             fill_this_details_text_win1 = tk.Label(win1 , text="Fill the Patient Data before adding items!:-" , font=("London-Tube" , 15 ) , background="red")
             fill_this_details_text_win1.place(x=10 , y=450)
             
-            cust_name_text_win1 = tk.Label(win1 , text="Patient Name:")
+            cust_name_text_win1 = tk.Label(win1 , text="Name:")
             cust_name_text_win1.place(x=10 , y=490)
             cust_name_entry_win1 = tk.Entry(win1)
             cust_name_entry_win1.place(x=119 , y=490)
             
             
-            cust_age_text_win1 = tk.Label(win1 , text="Patient Age:")
+            cust_age_text_win1 = tk.Label(win1 , text="Age:")
             cust_age_text_win1.place(x=10 , y=515)
             cust_age_entry_win1 = tk.Entry(win1)
             cust_age_entry_win1.place(x=119 , y=515)
             
             
             
-            cust_address_text_win1 = tk.Label(win1 , text="Patient Address:")
+            cust_address_text_win1 = tk.Label(win1 , text="Address:")
             cust_address_text_win1.place(x=10 , y=542)
             cust_address_entry_win1 = tk.Entry(win1)
             cust_address_entry_win1.place(x=120  , y=542)
@@ -580,7 +578,7 @@ try:
 
             clicked2 = tk.StringVar()
             options2=["----SELECT GENDER----" , "MALE" , "FEMALE"]
-            cust_gender_text_win1 = tk.Label(win1 , text="Patient Gender:")
+            cust_gender_text_win1 = tk.Label(win1 , text="Gender:")
             cust_gender_text_win1.place(x=10 , y=574)
             clicked2 = tk.StringVar() 
             
