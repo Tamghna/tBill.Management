@@ -125,7 +125,7 @@ os.chdir("settings")
 com_name_get = open("com_name.set" , 'r').read()
 os.chdir("..")
 
-welcome_text = tk.Label(root  , text="WELCOME , " + com_name_get + "    SOFTWARE_VER:" + cur_ver  , font=("London-Tube" , 25))
+welcome_text = tk.Label(root  , text="WELCOME |   " + com_name_get + "  |  SOFTWARE VERSION:" + cur_ver  , font=("London-Tube" , 25))
 welcome_text.pack()
 
 
@@ -171,9 +171,6 @@ tabControl.pack(expand = 1, fill ="both" , padx=10 , pady= 10)
 
 
 #home:
-todays_sale_label = tk.Label(tab1 , text="Todays Sales:" , font=("Impact" , 15))
-todays_sale_label.pack()
-
 
 
 
