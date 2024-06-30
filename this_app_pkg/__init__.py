@@ -315,7 +315,7 @@ try:
 
                 item_quantity = itemquantity_entry_entry_win1.get()
 
-                item_gst = "12%"
+                item_gst = "|"
 
                 global total_price_count
 
@@ -521,7 +521,7 @@ try:
             # respective columns
             treev_win1.heading("1", text ="ITEM NAME")
             treev_win1.heading("2", text ="PRICE")
-            treev_win1.heading("3", text ="GST")
+            treev_win1.heading("3", text ="[NOT REQUIRED]")
             treev_win1.heading("4", text ="QUANTITY")
             
             # Inserting the items and their features to the 
@@ -545,7 +545,7 @@ try:
             
             
             
-            fill_this_details_text_win1 = tk.Label(win1 , text="Fill the Patient Data before adding items!:-" , font=("London-Tube" , 15 ) , background="red")
+            fill_this_details_text_win1 = tk.Label(win1 , text="Fill the CUST Data before adding items!:-" , font=("London-Tube" , 15 ) , background="red")
             fill_this_details_text_win1.place(x=10 , y=450)
             
             cust_name_text_win1 = tk.Label(win1 , text="Name:")
@@ -777,7 +777,7 @@ try:
             # respective columns
             treev.heading("1", text ="Item Name")
             treev.heading("2", text ="Price in ₹")
-            treev.heading("3", text ="GST%")
+            treev.heading("3", text ="[Not Required]")
 
             # Inserting the items and their features to the 
             # columns built

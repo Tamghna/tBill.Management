@@ -334,7 +334,7 @@ def edit_bill():
             treev2.heading("1", text ="Item Name")
             treev2.heading("2", text ="Price")
             treev2.heading("3", text ="Quantity")
-            treev2.heading("4", text ="GST%")
+            treev2.heading("4", text ="[NOT REQUIRED]")
             
             # Inserting the items and their features to the 
             # columns built
