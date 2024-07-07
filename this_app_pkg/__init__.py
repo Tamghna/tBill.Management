@@ -213,9 +213,9 @@ try:
                         cells[3].text=  str(  "Rs." +   quantiry)
                 
                 cells5 = table.add_row().cells
-                cells5[0].text=''
-                cells5[1].text=''
-                cells5[2].text=''
+                cells5[0].text='-'
+                cells5[1].text='-'
+                cells5[2].text='-'
                 cells5[3].text= "Total:- Rs." +str(total_price_count)
 
 
@@ -315,7 +315,7 @@ try:
 
                 item_quantity = itemquantity_entry_entry_win1.get()
 
-                item_gst = "|"
+                item_gst = ""
 
                 global total_price_count
 
@@ -408,21 +408,21 @@ try:
             win1.attributes('-fullscreen', True)
             win1.geometry("1300x800")
             win1.title("CREATE A NEW BILL _ WINDOW")
-            win1.config(background="#b3c6ff")
+            win1.config(background="#b4c6ff")
             from tkinter import messagebox
 
             def exit_command():
                  if messagebox.askyesnocancel("" , "WARNING :THIS ACTION WILL EXIT THIS WINDOW AND GO BACK TO THE HOME SCREEN .. ANY UNSAVED WORK WILL BE LOST!  .. DO YOU WANT TO EXIT?" , parent=win1):
                       win1.destroy()
 
-            exit_button = tk.Button(win1 , text="Back❌" , command=exit_command)
+            exit_button = tk.Button(win1 , text="Back  🔙" , command=exit_command)
             exit_button.place(x=1200 , y=10)            
             
-            heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19))
+            heading_win1 = tk.Label(win1,text="Create New Bill/Invoice :-" , font=("London-Tube" , 19), background="#b4c6ff")
             heading_win1.pack(pady=10)
             
             
-            manual_itemname_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM NAME MANUALLY:-")
+            manual_itemname_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM NAME MANUALLY:-" , background="#b4c6ff")
             manual_itemname_entry_text_win1.pack(anchor="n" , side="left" , padx=2 , pady=10)
             
             manual_itemname_entry_entry_win1 = tk.Entry(win1)
@@ -435,7 +435,7 @@ try:
             
             
             
-            manual_itemprice_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM PRICE MANUALLY:-")
+            manual_itemprice_entry_text_win1 = tk.Label(win1 , text="ENTER ITEM PRICE MANUALLY:-" , background="#b4c6ff")
             manual_itemprice_entry_text_win1.pack(anchor="n" , side="left" , padx=10 , pady=10)
             
             manual_itemprice_entry_entry_win1 = tk.Entry(win1)
@@ -445,7 +445,7 @@ try:
             
             
             
-            itemquantity_entry_text_win1 = tk.Label(win1 , text="ENTER Quantity:-")
+            itemquantity_entry_text_win1 = tk.Label(win1 , text="ENTER Quantity:-", background="#b4c6ff")
             itemquantity_entry_text_win1.pack(anchor="n" , side="left" , padx=10 , pady=10)
             
             itemquantity_entry_entry_win1 = tk.Entry(win1)
@@ -514,14 +514,14 @@ try:
             # respective columns
             treev_win1.column("1", width = 270, anchor ='c')
             treev_win1.column("2", width = 150, anchor ='c')
-            treev_win1.column("3", width = 150, anchor ='c')
+            treev_win1.column("3", width = 0, anchor ='c')
             treev_win1.column("4", width = 150, anchor ='c')
             
             # Assigning the heading names to the 
             # respective columns
             treev_win1.heading("1", text ="ITEM NAME")
             treev_win1.heading("2", text ="PRICE")
-            treev_win1.heading("3", text ="[NOT REQUIRED]")
+            treev_win1.heading("3", text ="")
             treev_win1.heading("4", text ="QUANTITY")
             
             # Inserting the items and their features to the 
@@ -539,7 +539,7 @@ try:
             remove_selected_item_button_win1 = tk.Button(win1 , text="REMOVE AN SELECTED ITEM ❌" , bootstyle="outlined" , command=remove_from_item_list_view_win1)
             remove_selected_item_button_win1.place(x=170 , y=390)
 
-            save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="outlined" , command=save_bill_win1_function)
+            save_bill_win1 = tk.Button(win1 , text="SAVE BILL/INVOICE 💾" , bootstyle="sucess" , command=save_bill_win1_function)
             save_bill_win1.place(x=970 , y=390)
 
             
@@ -548,20 +548,20 @@ try:
             fill_this_details_text_win1 = tk.Label(win1 , text="Fill the CUST Data before adding items!:-" , font=("London-Tube" , 15 ) , background="red")
             fill_this_details_text_win1.place(x=10 , y=450)
             
-            cust_name_text_win1 = tk.Label(win1 , text="Name:")
+            cust_name_text_win1 = tk.Label(win1 , text="Name:" , background="#b4c6ff")
             cust_name_text_win1.place(x=10 , y=490)
             cust_name_entry_win1 = tk.Entry(win1)
             cust_name_entry_win1.place(x=119 , y=490)
             
             
-            cust_age_text_win1 = tk.Label(win1 , text="Age:")
+            cust_age_text_win1 = tk.Label(win1 , text="Age:", background="#b4c6ff")
             cust_age_text_win1.place(x=10 , y=515)
             cust_age_entry_win1 = tk.Entry(win1)
             cust_age_entry_win1.place(x=119 , y=515)
             
             
             
-            cust_address_text_win1 = tk.Label(win1 , text="Address:")
+            cust_address_text_win1 = tk.Label(win1 , text="Address:", background="#b4c6ff")
             cust_address_text_win1.place(x=10 , y=542)
             cust_address_entry_win1 = tk.Entry(win1)
             cust_address_entry_win1.place(x=120  , y=542)
@@ -569,7 +569,7 @@ try:
 
             global show_total
 
-            show_total = tk.Label(win1 , text="Total=0" , font=("Ariel" , 16) , bootstyle = "danger")
+            show_total = tk.Label(win1 , text="Total=0" , font=("Ariel" , 16) , bootstyle = "danger", background="#b4c6ff")
             show_total.place(x=980 , y=300)
             
             
@@ -578,7 +578,7 @@ try:
 
             clicked2 = tk.StringVar()
             options2=["----SELECT GENDER----" , "MALE" , "FEMALE"]
-            cust_gender_text_win1 = tk.Label(win1 , text="Gender:")
+            cust_gender_text_win1 = tk.Label(win1 , text="Gender:", background="#b4c6ff")
             cust_gender_text_win1.place(x=10 , y=574)
             clicked2 = tk.StringVar() 
             
@@ -600,17 +600,17 @@ try:
 
             if hpval == "1":
                  
-                cal_addmission_text = tk.Label(win1 , text="Date Of Addmission:-" )
+                cal_addmission_text = tk.Label(win1 , text="Date Of Addmission:-" , background="#b4c6ff")
                 cal_addmission_text.place(x=10 , y=650)
                 cal_addmission = tk.DateEntry(win1 , bootstyle="danger")
-                cal_addmission.place(x=100 , y=650)
+                cal_addmission.place(x=140 , y=650)
 
 
 
-                cal_dis_text = tk.Label(win1 , text="Date Of Discharge:-" )
+                cal_dis_text = tk.Label(win1 , text="Date Of Discharge:-" , background="#b4c6ff")
                 cal_dis_text.place(x=470 , y=650)
                 cal_dis = tk.DateEntry(win1 , bootstyle="danger")
-                cal_dis.place(x=560 , y=650)
+                cal_dis.place(x=600 , y=650)
 
             con1.close()
 

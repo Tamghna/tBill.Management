@@ -3,7 +3,7 @@ class time():
         import time
         from time import strftime
 
-        formatted_date = strftime("%d-%m-%Y %H:%M:%S")
+        formatted_date = strftime("%d-%m-%Y  --   %H:%M:%S")
         
         return formatted_date
         

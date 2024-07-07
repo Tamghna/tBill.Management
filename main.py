@@ -33,6 +33,8 @@ if ft_val == "FIRST_OPEN":
         f.write(com_name)
         f.close()
     os.chdir("..")
+
+    messagebox.showinfo('' , "PLEASE SET THE LOGO FILE FROM THE SETTINGS TAB BEFORE CREATING A BILL/INVOICE!")
     
     with open("ft_value.val" , 'w')as w:
         w.write("SUCESS_SETUP[CODE:0]")
@@ -125,12 +127,12 @@ os.chdir("settings")
 com_name_get = open("com_name.set" , 'r').read()
 os.chdir("..")
 
-welcome_text = tk.Label(root  , text="WELCOME |   " + com_name_get + "  |  SOFTWARE VERSION:" + cur_ver  , font=("London-Tube" , 25))
+welcome_text = tk.Label(root  , text="Welcome to tBill.Management |   " + "Company Name: " +com_name_get + "  |  Software Version:" + cur_ver  , font=("London-Tube" , 25) , background="#b4c6ff")
 welcome_text.pack()
 
 
 
-date_time_label = tk.Label(root , text="DATA_NOT_FOUND" , font=("London-Tube" , 20))
+date_time_label = tk.Label(root , text="DATA_NOT_FOUND" , font=("London-Tube" , 17), background="#b4c6ff")
 date_time_label.pack()
 
 exit_button = tk.Button(root , text="EXIT" , command=sys.exit , bootstyle="success.Outline.TButton")
@@ -206,17 +208,17 @@ def refresh():
     
     # Assigning the width and anchor to  the
     # respective columns
-    treev.column("1", width = 150, anchor ='c')
-    treev.column("2", width = 150, anchor ='c')
-    treev.column("3", width = 150, anchor ='c')
-    treev.column("4", width = 150, anchor ='c')
+    treev.column("1", width = 200, anchor ='c')
+    treev.column("2", width = 200, anchor ='c')
+    treev.column("3", width = 170, anchor ='c')
+    treev.column("4", width = 205, anchor ='c')
     
     # Assigning the heading names to the 
     # respective columns
     treev.heading("1", text ="Name")
     treev.heading("2", text ="Address")
     treev.heading("3", text ="AMMOUNT")
-    treev.heading("4", text ="Date")
+    treev.heading("4", text ="Creation/Edit - Date And Time")
     
     # Inserting the items and their features to the 
     # columns built
